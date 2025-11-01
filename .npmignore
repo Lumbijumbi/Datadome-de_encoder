@@ -1,0 +1,21 @@
+# Test files
+datadome-de-encoder/test1.js
+datadome-de-encoder/data/
+datadome-de-encoder/output/
+
+# Git files
+.git/
+.gitignore
+.github/
+
+# Development files
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*

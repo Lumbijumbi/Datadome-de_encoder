@@ -1,0 +1,33 @@
+{
+  "name": "datadome-de-encoder",
+  "version": "1.0.0",
+  "description": "DataDome encryption and decryption module for handling captcha and interstitial challenges",
+  "main": "datadome-de-encoder/src/index.js",
+  "scripts": {
+    "test": "node datadome-de-encoder/test1.js"
+  },
+  "keywords": [
+    "datadome",
+    "encryption",
+    "decryption",
+    "captcha",
+    "interstitial",
+    "security"
+  ],
+  "author": "mxo23",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lumbijumbi/Datadome-de_encoder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Lumbijumbi/Datadome-de_encoder/issues"
+  },
+  "homepage": "https://github.com/Lumbijumbi/Datadome-de_encoder#readme",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "datadome-de-encoder/src/"
+  ]
+}
