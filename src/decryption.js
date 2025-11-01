@@ -323,7 +323,8 @@ class DataDomeDecryptor {
                         
                         // Essayer de parser correctement la chaine avec JSON.parse pour gerer les echappements
                         try {
-                            value = JSON.parse(`"${valueContent.replace(/"/g, '\\"')}"`);
+                            // Escape backslashes first, then quotes
+                            value = JSON.parse(`"${valueContent.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"`);
                         } catch (e) {
                             // Si le parsing echoue, utiliser la chaine brute
                             value = this._unescapeString(valueContent);
