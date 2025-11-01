@@ -6,6 +6,22 @@ Guide d'utilisation complet du module de chiffrement/déchiffrement DataDome.
 
 discord: mxo23
 
+## Installation
+
+### Via npm
+
+```bash
+npm install datadome-de-encoder
+```
+
+### Via GitHub
+
+```bash
+git clone https://github.com/Lumbijumbi/Datadome-de_encoder.git
+cd Datadome-de_encoder
+npm install
+```
+
 ## Utilisation
 
 ### Import du module
