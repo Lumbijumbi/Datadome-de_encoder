@@ -1,0 +1,19 @@
+# Old directory structure (now moved to root)
+datadome-de-encoder/
+
+# Git files
+.git/
+.gitignore
+.github/
+
+# Development files
+*.md
+!README.md
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
