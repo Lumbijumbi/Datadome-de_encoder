@@ -1,7 +1,5 @@
-# Test files
-datadome-de-encoder/test1.js
-datadome-de-encoder/data/
-datadome-de-encoder/output/
+# Old directory structure (now moved to root)
+datadome-de-encoder/
 
 # Git files
 .git/

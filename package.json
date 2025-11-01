@@ -2,9 +2,9 @@
   "name": "datadome-de-encoder",
   "version": "1.0.0",
   "description": "DataDome encryption and decryption module for handling captcha and interstitial challenges",
-  "main": "datadome-de-encoder/src/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "node datadome-de-encoder/test1.js"
+    "test": "echo \"No tests configured\""
   },
   "keywords": [
     "datadome",
@@ -28,6 +28,6 @@
     "node": ">=12.0.0"
   },
   "files": [
-    "datadome-de-encoder/src/"
+    "src/"
   ]
 }
