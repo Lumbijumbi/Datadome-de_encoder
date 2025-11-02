@@ -1,5 +1,10 @@
 # DataDome Encryption - Guide d'utilisation
 
+[![npm version](https://img.shields.io/npm/v/datadome-de-encoder.svg)](https://www.npmjs.com/package/datadome-de-encoder)
+[![npm downloads](https://img.shields.io/npm/dm/datadome-de-encoder.svg)](https://www.npmjs.com/package/datadome-de-encoder)
+[![license](https://img.shields.io/npm/l/datadome-de-encoder.svg)](https://github.com/Lumbijumbi/Datadome-de_encoder/blob/main/LICENSE)
+[![node version](https://img.shields.io/node/v/datadome-de-encoder.svg)](https://www.npmjs.com/package/datadome-de-encoder)
+
 Guide d'utilisation complet du module de chiffrement/déchiffrement DataDome.
 
 ## Contact

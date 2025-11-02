@@ -168,9 +168,12 @@ class DataDomeDecryptor {
         let bytes = [];
         let n = this.salt;
 
-        for (let i = 0; i < encoded.length; i += 4) {
-            if (i + 3 >= encoded.length) break;
-
+        // Calculate how many complete groups we have
+        let completeGroups = Math.floor(encoded.length / 4);
+        let remainder = encoded.length % 4;
+        
+        // Decode complete 4-character groups (3 bytes each)
+        for (let i = 0; i < completeGroups * 4; i += 4) {
             let c1 = this._decode6Bits(encoded.charCodeAt(i));
             let c2 = this._decode6Bits(encoded.charCodeAt(i + 1));
             let c3 = this._decode6Bits(encoded.charCodeAt(i + 2));
@@ -182,15 +185,27 @@ class DataDomeDecryptor {
             bytes.push(((chunk >> 8) & 255) ^ (--n & 255));
             bytes.push((chunk & 255) ^ (--n & 255));
         }
-        return bytes;
-        if (this.challengeType === 'interstitial') {
-            return bytes;
-        }
-
-        // Gerer le padding si necessaire
-        let mod = encoded.length % 4;
-        if (mod) {
-            bytes = bytes.slice(0, bytes.length - (3 - mod));
+        
+        // Handle remaining characters (incomplete group at the end)
+        if (remainder > 0) {
+            let startIdx = completeGroups * 4;
+            
+            // Pad to make a complete group of 4
+            // remainder 2 = 1 byte output, remainder 3 = 2 bytes output
+            let c1 = this._decode6Bits(encoded.charCodeAt(startIdx));
+            let c2 = remainder > 1 ? this._decode6Bits(encoded.charCodeAt(startIdx + 1)) : 0;
+            let c3 = remainder > 2 ? this._decode6Bits(encoded.charCodeAt(startIdx + 2)) : 0;
+            let c4 = 0; // Always 0 for incomplete groups
+            
+            let chunk = (c1 << 18) | (c2 << 12) | (c3 << 6) | c4;
+            
+            // Add bytes based on remainder count
+            if (remainder >= 2) {
+                bytes.push(((chunk >> 16) & 255) ^ (--n & 255));
+            }
+            if (remainder >= 3) {
+                bytes.push(((chunk >> 8) & 255) ^ (--n & 255));
+            }
         }
 
         return bytes;
