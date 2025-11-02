@@ -18,6 +18,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - UTF-8 encoding support
 - Comprehensive README documentation in French
 - MIT License
+- Express.js server example with REST API endpoints
+- Examples README documentation
+- Development dependencies for Express server example
 
 ### Features
 - Encrypt key-value pairs for DataDome challenges
@@ -27,5 +30,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Challenge type switching capability
 - Salt auto-generation or manual specification
 - Full encryption/decryption cycle support
+- REST API interface via Express.js example
 
 [1.0.0]: https://github.com/Lumbijumbi/Datadome-de_encoder/releases/tag/v1.0.0
