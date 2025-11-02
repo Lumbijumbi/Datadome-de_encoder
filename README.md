@@ -2,6 +2,26 @@
 
 Guide d'utilisation complet du module de chiffrement/déchiffrement DataDome.
 
+## ⚡ Quick Start (OpenBullet2)
+
+Pour utiliser avec OpenBullet2 :
+
+```bash
+# 1. Cloner le repo
+git clone https://github.com/Lumbijumbi/Datadome-de_encoder.git
+cd Datadome-de_encoder
+
+# 2. Installer les dépendances
+npm install
+
+# 3. Démarrer l'API
+npm start
+```
+
+L'API sera disponible sur `http://localhost:3000`
+
+📖 **[Guide complet OpenBullet2](OPENBULLET2.md)**
+
 ## Contact
 
 discord: mxo23
