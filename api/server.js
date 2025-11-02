@@ -35,7 +35,7 @@ app.post('/encrypt', (req, res) => {
         }
 
         // Validate data is an object or array (but not null)
-        if (!data || typeof data !== 'object') {
+        if (data == null || typeof data !== 'object') {
             return res.status(400).json({
                 error: 'Data must be an object or array of key-value pairs',
                 example: { key1: 'value1', key2: 'value2' }
@@ -47,10 +47,17 @@ app.post('/encrypt', (req, res) => {
 
         // Add data to encryptor
         if (Array.isArray(data)) {
-            // If data is array of [key, value] pairs
-            data.forEach(([key, value]) => {
+            // If data is array of [key, value] pairs, validate structure
+            for (const item of data) {
+                if (!Array.isArray(item) || item.length !== 2) {
+                    return res.status(400).json({
+                        error: 'Array elements must be [key, value] pairs',
+                        example: [['key1', 'value1'], ['key2', 'value2']]
+                    });
+                }
+                const [key, value] = item;
                 encryptor.add(key, value);
-            });
+            }
         } else {
             // If data is an object
             Object.entries(data).forEach(([key, value]) => {

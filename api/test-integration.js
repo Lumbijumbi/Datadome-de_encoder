@@ -174,9 +174,14 @@ async function runTests() {
 }
 
 // Check if server is running before starting tests
-makeRequest('/health').then(() => {
+makeRequest('/health').then(async () => {
     console.log('Server is running. Starting tests...\n');
-    runTests();
+    try {
+        await runTests();
+    } catch (error) {
+        console.error('Test execution failed:', error.message);
+        process.exit(1);
+    }
 }).catch((error) => {
     console.error('❌ Error: Server is not running!');
     console.error('Please start the server first with: npm start');
