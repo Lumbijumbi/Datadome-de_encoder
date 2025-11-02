@@ -4,7 +4,9 @@
   "description": "DataDome encryption and decryption module for handling captcha and interstitial challenges",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"No tests configured\""
+    "test": "echo \"No tests configured\"",
+    "start": "node api/server.js",
+    "dev": "node api/server.js"
   },
   "keywords": [
     "datadome",
@@ -12,7 +14,9 @@
     "decryption",
     "captcha",
     "interstitial",
-    "security"
+    "security",
+    "api",
+    "openbullet2"
   ],
   "author": "mxo23",
   "license": "MIT",
@@ -28,6 +32,10 @@
     "node": ">=12.0.0"
   },
   "files": [
-    "src/"
-  ]
+    "src/",
+    "api/"
+  ],
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
