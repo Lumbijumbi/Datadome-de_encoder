@@ -4,7 +4,9 @@
   "description": "DataDome encryption and decryption module for handling captcha and interstitial challenges",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"No tests configured\""
+    "test": "node examples/basic-usage.js",
+    "prepublishOnly": "npm run validate",
+    "validate": "npm pack --dry-run && node -e \"const pkg = require('./package.json'); console.log('Package validation passed!'); console.log('Version:', pkg.version); console.log('Main:', pkg.main);\""
   },
   "keywords": [
     "datadome",
@@ -28,6 +30,8 @@
     "node": ">=12.0.0"
   },
   "files": [
-    "src/"
+    "src/",
+    "examples/",
+    "CHANGELOG.md"
   ]
 }
