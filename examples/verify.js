@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * Quick verification script to test if the package works correctly
  * Run this after publishing to verify the package is functional

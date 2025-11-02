@@ -191,7 +191,8 @@ class DataDomeDecryptor {
             let startIdx = completeGroups * 4;
             
             // Pad to make a complete group of 4
-            let c1 = remainder > 0 ? this._decode6Bits(encoded.charCodeAt(startIdx)) : 0;
+            // remainder 2 = 1 byte output, remainder 3 = 2 bytes output
+            let c1 = this._decode6Bits(encoded.charCodeAt(startIdx));
             let c2 = remainder > 1 ? this._decode6Bits(encoded.charCodeAt(startIdx + 1)) : 0;
             let c3 = remainder > 2 ? this._decode6Bits(encoded.charCodeAt(startIdx + 2)) : 0;
             let c4 = 0; // Always 0 for incomplete groups
@@ -199,7 +200,6 @@ class DataDomeDecryptor {
             let chunk = (c1 << 18) | (c2 << 12) | (c3 << 6) | c4;
             
             // Add bytes based on remainder count
-            // remainder 2 = 1 byte, remainder 3 = 2 bytes
             if (remainder >= 2) {
                 bytes.push(((chunk >> 16) & 255) ^ (--n & 255));
             }
