@@ -15,6 +15,14 @@ app.get('/health', (req, res) => {
 // Encrypt endpoint
 app.post('/encrypt', (req, res) => {
     try {
+        // Validate request body exists and is an object
+        if (!req.body || typeof req.body !== 'object') {
+            return res.status(400).json({
+                error: 'Invalid request body',
+                message: 'Request body must be a valid JSON object'
+            });
+        }
+
         const { hash, cid, data, salt = null, challengeType = 'captcha' } = req.body;
 
         // Validate required fields
@@ -26,8 +34,8 @@ app.post('/encrypt', (req, res) => {
             });
         }
 
-        // Validate data is an object or array
-        if (typeof data !== 'object') {
+        // Validate data is an object or array (but not null)
+        if (!data || typeof data !== 'object') {
             return res.status(400).json({
                 error: 'Data must be an object or array of key-value pairs',
                 example: { key1: 'value1', key2: 'value2' }
@@ -70,6 +78,14 @@ app.post('/encrypt', (req, res) => {
 // Decrypt endpoint
 app.post('/decrypt', (req, res) => {
     try {
+        // Validate request body exists and is an object
+        if (!req.body || typeof req.body !== 'object') {
+            return res.status(400).json({
+                error: 'Invalid request body',
+                message: 'Request body must be a valid JSON object'
+            });
+        }
+
         const { hash, cid, encrypted, salt = null, challengeType = 'captcha' } = req.body;
 
         // Validate required fields

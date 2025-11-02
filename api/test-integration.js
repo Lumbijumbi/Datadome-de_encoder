@@ -177,8 +177,12 @@ async function runTests() {
 makeRequest('/health').then(() => {
     console.log('Server is running. Starting tests...\n');
     runTests();
-}).catch(() => {
+}).catch((error) => {
     console.error('❌ Error: Server is not running!');
-    console.error('Please start the server first with: npm start\n');
+    console.error('Please start the server first with: npm start');
+    console.error(`\nConnection error details: ${error.message}`);
+    console.error(`  - Check if the server is running on ${API_URL}`);
+    console.error(`  - Verify the port is not blocked by firewall`);
+    console.error(`  - Ensure no other process is using the port\n`);
     process.exit(1);
 });
