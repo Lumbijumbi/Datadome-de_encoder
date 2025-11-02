@@ -2,6 +2,26 @@
 
 Guide d'utilisation complet du module de chiffrement/déchiffrement DataDome.
 
+## ⚡ Quick Start (OpenBullet2)
+
+Pour utiliser avec OpenBullet2 :
+
+```bash
+# 1. Cloner le repo
+git clone https://github.com/Lumbijumbi/Datadome-de_encoder.git
+cd Datadome-de_encoder
+
+# 2. Installer les dépendances
+npm install
+
+# 3. Démarrer l'API
+npm start
+```
+
+L'API sera disponible sur `http://localhost:3000`
+
+📖 **[Guide complet OpenBullet2](OPENBULLET2.md)**
+
 ## Contact
 
 discord: mxo23
@@ -23,6 +43,168 @@ npm install
 ```
 
 ## Utilisation
+
+Ce module peut être utilisé de deux manières :
+1. **API REST** - Pour OpenBullet2 et autres outils d'automatisation
+2. **Module Node.js** - Pour intégration directe dans votre code
+
+---
+
+## API REST (pour OpenBullet2)
+
+### Démarrer le serveur API
+
+```bash
+npm start
+# ou
+node api/server.js
+```
+
+Le serveur démarre sur le port 3000 par défaut (configurable via la variable d'environnement `PORT`).
+
+### Endpoints disponibles
+
+#### `GET /health`
+Vérifie l'état du serveur.
+
+**Réponse:**
+```json
+{
+  "status": "ok",
+  "message": "DataDome De/Encoder API is running"
+}
+```
+
+#### `GET /`
+Documentation de l'API avec tous les endpoints et exemples.
+
+#### `POST /encrypt`
+Chiffre des données avec l'algorithme DataDome.
+
+**Requête:**
+```json
+{
+  "hash": "D9A52CB22EA3EBADB89B9212A5EB6",
+  "cid": "tUL4RXkyLUJxd3N2UVY4X3NHfmJkZX5zYGBmZmZ8Y1VpY1U",
+  "data": {
+    "screenWidth": 1920,
+    "screenHeight": 1080,
+    "userAgent": "Mozilla/5.0"
+  },
+  "salt": 0,
+  "challengeType": "captcha"
+}
+```
+
+**Réponse:**
+```json
+{
+  "success": true,
+  "encrypted": "un-inKbJjbq9rOZspVNwrUpDFLdDpZjXB8FY9SKPN3bPmc23T0aXbQhNP7HI0y8qVlldrmkKWD6ZFUOuSFshn_7Z",
+  "salt": 0,
+  "challengeType": "captcha"
+}
+```
+
+#### `POST /decrypt`
+Déchiffre un payload DataDome.
+
+**Requête:**
+```json
+{
+  "hash": "D9A52CB22EA3EBADB89B9212A5EB6",
+  "cid": "tUL4RXkyLUJxd3N2UVY4X3NHfmJkZX5zYGBmZmZ8Y1VpY1U",
+  "encrypted": "un-inKbJjbq9rOZspVNwrUpDFLdDpZjXB8FY9SKPN3bPmc23T0aXbQhNP7HI0y8qVlldrmkKWD6ZFUOuSFshn_7Z",
+  "salt": 0,
+  "challengeType": "captcha"
+}
+```
+
+**Réponse:**
+```json
+{
+  "success": true,
+  "decrypted": {
+    "screenWidth": 1920,
+    "screenHeight": 1080,
+    "userAgent": "Mozilla/5.0"
+  },
+  "decryptedArray": [
+    ["screenWidth", 1920],
+    ["screenHeight", 1080],
+    ["userAgent", "Mozilla/5.0"]
+  ],
+  "challengeType": "captcha"
+}
+```
+
+### Utilisation avec OpenBullet2
+
+Dans OpenBullet2, utilisez le bloc **HTTP Request** pour appeler l'API :
+
+**Exemple d'encryption :**
+```
+Method: POST
+URL: http://localhost:3000/encrypt
+Content-Type: application/json
+Body:
+{
+  "hash": "<hash>",
+  "cid": "<cid>",
+  "data": {
+    "key1": "value1",
+    "key2": "value2"
+  },
+  "challengeType": "captcha"
+}
+```
+
+Récupérez le résultat avec `<SOURCE>` et parsez le JSON pour obtenir la valeur `encrypted`.
+
+**Exemple de decryption :**
+```
+Method: POST
+URL: http://localhost:3000/decrypt
+Content-Type: application/json
+Body:
+{
+  "hash": "<hash>",
+  "cid": "<cid>",
+  "encrypted": "<encrypted_payload>",
+  "challengeType": "captcha"
+}
+```
+
+### Exemples cURL
+
+**Encryption:**
+```bash
+curl -X POST http://localhost:3000/encrypt \
+  -H "Content-Type: application/json" \
+  -d '{
+    "hash": "D9A52CB22EA3EBADB89B9212A5EB6",
+    "cid": "tUL4RXkyLUJxd3N2UVY4X3NHfmJkZX5zYGBmZmZ8Y1VpY1U",
+    "data": {"screenWidth": 1920, "screenHeight": 1080},
+    "challengeType": "captcha"
+  }'
+```
+
+**Decryption:**
+```bash
+curl -X POST http://localhost:3000/decrypt \
+  -H "Content-Type: application/json" \
+  -d '{
+    "hash": "D9A52CB22EA3EBADB89B9212A5EB6",
+    "cid": "tUL4RXkyLUJxd3N2UVY4X3NHfmJkZX5zYGBmZmZ8Y1VpY1U",
+    "encrypted": "un-inKbJjbq9rOZspVNwrUpDFLdDpZjXB8FY9SKPN3bPmc23T0aXbQhNP7HI0y8qVlldrmkKWD6ZFUOuSFshn_7Z",
+    "salt": 0,
+    "challengeType": "captcha"
+  }'
+```
+
+---
+
+## Module Node.js (intégration directe)
 
 ### Import du module
 
